@@ -99,12 +99,12 @@ public class ClientAppletB extends Applet{
         if (serverAID == null) 
             ISOException.throwIt(SW_SERVER_NOT_EXISTS);
         
-        /*MSIB_SO = (MSIB)(JCSystem.getAppletShareableInterfaceObject(serverAID, (byte) 0));
+        MSIB_SO = (MSIB)(JCSystem.getAppletShareableInterfaceObject(serverAID, (byte) 0));
         
         if (MSIB_SO == null) 
             ISOException.throwIt(SW_FAILED_TO_OBTAIN_MSI);
         
-        MSIB_SO.grantCreditClientB(amount);*/
+        MSIB_SO.grantCreditClientB(amount);
         
         /* ClientAppletB should be given access to only MSIB type. Access to MSIC type should be prevented */  
         MSIC_SO = (MSIC) JCSystem.getAppletShareableInterfaceObject(serverAID, (byte)0);
