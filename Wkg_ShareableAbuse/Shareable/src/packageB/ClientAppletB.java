@@ -94,16 +94,19 @@ public class ClientAppletB extends Applet{
     
     public void grantCredit(short amount){
         
+	/* Look for the AID of the ServerApplet */
         serverAID = JCSystem.lookupAID(AID_SERVER, (short) 0, (byte) AID_SERVER.length);
         
         if (serverAID == null) 
             ISOException.throwIt(SW_SERVER_NOT_EXISTS);
         
+	/* Get the Shareable Interface object of type MSIB */
         MSIB_SO = (MSIB)(JCSystem.getAppletShareableInterfaceObject(serverAID, (byte) 0));
         
         if (MSIB_SO == null) 
             ISOException.throwIt(SW_FAILED_TO_OBTAIN_MSI);
         
+	/* Legally allowed by JCRE */
         MSIB_SO.grantCreditClientB(amount);
         
         /* ClientAppletB should be given access to only MSIB type. Access to MSIC type should be prevented */  
@@ -112,6 +115,7 @@ public class ClientAppletB extends Applet{
         if (MSIC_SO == null) 
             ISOException.throwIt(SW_FAILED_TO_OBTAIN_MSI);
         
+	/* Allowed by JCRE, but JCRE should have prevented this */
         MSIC_SO.grantCreditClientC(amount);
                
     }

