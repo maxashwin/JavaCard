@@ -1,0 +1,42 @@
+=============================================================================================================================================
+
+Java Card: JavaCOS A40
+
+=====================================
+
+CASE 1:  Reading bytes when APDU buffer is passed.
+
+	- Can read bytes when APDU buffer is passed.
+	- Returns 00 00 or xx xx , where xx is APDU buffer content 
+	- Returns 00 00 till offset is 00ad
+    	- Returns xx xx from offset 00ae till offset 0104
+    	- Returns error from offset 0105 onwards.
+
+CASE 2:  Reading bytes when user defined byte[] is passed.
+
+	- If own byte[] is created and passed, the JCRE throws exception. 
+    	- Applicable when both EEPROM and RAM type byte[] are passed.
+	- Since, APDU is a privileged array, the contents are returned
+	- Prohibits user array because it is not a privileged array like the APDU.
+
+=============================================================================================================================================
+
+Java Card: Gemalto USB Shell Token V2
+
+===================================
+
+CASE 1:  Reading bytes when APDU buffer is passed.
+
+    	- Returns 00 00 or  00 xx , where xx is APDU buffer content. 
+     	- Returns 00 00 till offset 0104 after completion of APDU buffer content.
+    	- Returns error from offset = 0105 onwards.
+	- To summarize, this card did not return any non-zeros value apart from the APDU buffer content.
+
+CASE 2:  Reading bytes when user defined byte[] is passed.
+
+	- If own byte[] is created and passed, the JCRE throws exception. 
+    	- Applicable when both EEPROM and RAM type byte[] are passed.
+	- Since, APDU is a privileged array, the contents are returned
+	- Prohibits user array because it is not a privileged array like the APDU.
+
+=============================================================================================================================================

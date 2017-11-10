@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project basedir="." default="toys" name="AppletPlayground build">
+  <!-- Applet building dependencies -->
+  <property name="JC222" value="ext/java_card_kit-2_2_2"/>
+  <property name="JC212" value="ext/java_card_kit-2_1_2"/>
+  <property name="JC303" value="ext/java_card_kit-3_0_3"/>
+  <property name="OP20" value="ext/visa_openplatform-2_0"/>
+  <property name="GP211" value="ext/globalplatform-2_1_1"/>
+  
+  <!-- ant-javacard task from javacard.pro -->
+  <taskdef name="javacard" classname="pro.javacard.ant.JavaCard" classpath="ext/ant-javacard.jar"/>
+
+  <target name="algtest">
+    <javacard jckit="${JC222}">
+    <cap output="Memory/output/algtest.cap" export="Memory/export" sources="Memory/src/AlgTest" classes="Memory/build/classes" aid="0102030401" version="1.1" >
+    	<applet class="AlgTest.JCAlgTestApplet" aid="010203040101"/>
+    	<import exps="Memory/export"/>
+    </cap>
+    </javacard>
+  </target>
+
+  <target name="simple">
+    <javacard jckit="${JC222}">
+    <cap output="Memory/output/simple.cap" export="Memory/export" sources="Memory/src/Simple" classes="Memory/build/classes" aid="0102030401" version="1.1" >
+    	<applet class="Simple.SimpleApplet" aid="010203040101"/>
+    	<import exps="Memory/export"/>
+    </cap>
+    </javacard>
+  </target>
+
+  <target name="openemv">
+    <javacard jckit="${JC222}">
+    <cap output="Memory/output/openemv.cap" export="Memory/export" sources="Memory/src/openemv" classes="Memory/build/classes" aid="0102030401" version="1.1" >
+    	<applet class="openemv.SimpleEMVApplet" aid="010203040101"/>
+    	<import exps="Memory/export"/>
+    </cap>
+    </javacard>
+  </target>
+
+  <target name="openpgpcard">
+    <javacard jckit="${JC212}">
+    <cap output="Memory/output/openpgpcard.cap" export="Memory/export" sources="Memory/src/openpgpcard" classes="Memory/build/classes" aid="0102030401" version="1.1" >
+    	<applet class="openpgpcard.OpenPGPApplet" aid="010203040101"/>
+    	<import exps="Memory/export"/>
+    </cap>
+    </javacard>
+  </target>
+
+  <target name="openpgp">
+    <javacard jckit="${JC212}">
+    <cap output="Memory/output/openpgp.cap" export="Memory/export" sources="Memory/src/openpgp" classes="Memory/build/classes" aid="0102030401" version="1.1" >
+    	<applet class="openemv.OpenPGPAppletMod" aid="010203040101"/>
+    	<import exps="Memory/export"/>
+    </cap>
+    </javacard>
+  </target>
+
+  <target name="plaid">
+    <javacard jckit="${JC222}">
+    <cap output="Memory/output/plaid.cap" export="Memory/export" sources="Memory/src/plaid804" classes="Memory/build/classes" aid="0102030401" version="1.1" >
+    	<applet class="plaid804.PLAID804" aid="010203040101"/>
+    	<import exps="Memory/export"/>
+    </cap>
+    </javacard>
+  </target>
+
+  <target name="license">
+    <javacard jckit="${JC222}">
+    <cap output="Memory/output/license.cap" export="Memory/export" sources="Memory/src/org/isodl/applet" classes="Memory/build/classes" aid="0102030401" version="1.1" >
+    	<applet class="org.isodl.applet.LicenseApplet" aid="010203040101"/>
+    	<import exps="Memory/export"/>
+    </cap>
+    </javacard>
+  </target>
+
+  <target name="eidcard">
+    <javacard jckit="${JC222}">
+    <cap output="Memory/output/eidcard.cap" export="Memory/export" sources="Memory/src/be/fedict/eidapplet" classes="Memory/build/classes" aid="0102030401" version="1.1" >
+    	<applet class="be.fedict.eidapplet.EidCard" aid="010203040101"/>
+    	<import exps="Memory/export"/>
+    </cap>
+    </javacard>
+  </target>
+
+  <target name="ykneooath">
+    <javacard jckit="${JC222}">
+    <cap output="Memory/output/ykneooath.cap" export="Memory/export" sources="Memory/src/pkgYkneoOath" classes="Memory/build/classes" aid="0102030401" version="1.1" >
+    	<applet class="pkgYkneoOath.YkneoOath" aid="010203040101"/>
+    	<import exps="Memory/export"/>
+    </cap>
+    </javacard>
+  </target>  
+
+  <target name="pkiapplet">
+    <javacard jckit="${JC222}">
+    <cap output="Memory/output/pkiapplet.cap" export="Memory/export" sources="Memory/src/net/sourceforge/javacardsign/applet" classes="Memory/build/classes" aid="0102030401" version="1.1" >
+    	<applet class="net.sourceforge.javacardsign.applet.PKIApplet" aid="010203040101"/>
+    	<import exps="Memory/export"/>
+    </cap>
+    </javacard>
+  </target> 
+
+  <target name="gpg">
+    <javacard jckit="${JC222}">
+    <cap output="Memory/output/gpg.cap" export="Memory/export" sources="Memory/src/net/ss3t/javacard/gpg" classes="Memory/build/classes" aid="0102030401" version="1.1" >
+    	<applet class="net.ss3t.javacard.gpg.Gpg" aid="010203040101"/>
+    	<import exps="Memory/export"/>
+    </cap>
+    </javacard>
+  </target> 
+
+  <target name="qtsesam">
+    <javacard jckit="${JC222}">
+    <cap output="Memory/output/qtsesam.cap" export="Memory/export" sources="Memory/src/review" classes="Memory/build/classes" aid="0102030401" version="1.1" >
+    	<applet class="review.QTSesamApplet" aid="010203040101"/>
+    	<import exps="Memory/export"/>
+    </cap>
+    </javacard>
+  </target>  
+
+
+</project>

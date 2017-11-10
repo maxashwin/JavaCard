@@ -1,0 +1,57 @@
+============================================================================================================================================
+DETAILS OF FILES
+
+The following files were coded:
+
+1.	scriptPreMeasurement.py		-	Python script
+2.	ComnCard.java			-	Java code
+3.	MemoryMeasurement.java		-	Java code
+4.	scriptPostMeasurement.py	-	Python script
+5	scriptMethodMemory.py		-	Python script
+
+============================================================================================================================================
+scriptPreMeasurement.py
+
+1.	User to change the sourceFile. sourceFile requires absolute or relative path along with the file name of the applet, whose constructor objects are required to be extracted and measured for memory.
+
+2.	Copies the original applet to a folder in current working directory(CWD) to keep a copy.
+
+3.	The python script parses the applet file to add the memory measurement statements as prefix and suffix to the objects whose memory consumption has to be measured.  The following are also added to support these statments:
+
+	(a) 	Global Variables declaration.
+	(b)	Variables definition inside the constructor.
+	(c)	public void process method to process the APDU.
+	(d)	memoryMeasure method to send back the measured values back to the user.
+
+4.	A constructorDetails.txt file is generated to store the line numbers of objects of the constrcutor for further processing.
+
+5.	Name of the generated applet is kept the same as the original.
+
+6.	The generated applet is copied to its original source path replacing the original applet. The generated applet is also copied into modified 1 folder to keep a copy.
+
+7.	The package name of MemoryMeasurement.java file is replaced by the package name of the generated applet and copied into the folder containing the generated applet file. The applet file creates an object of the MemoryMeasurement class to aid in the measurements. 
+
+============================================================================================================================================
+ComnCard.java 
+
+1.	Communicates with the applet and invokes the memoryMeasure method to measure consumption of memory by the objects in constructor.
+
+2.	The memory consumption values returned by the Java Card are processed and appended to the constructorDetails.txt file for further processing.
+
+3.	The filename in the ComnCard file needs to be changed to point to the constructorDetails.txt file
+
+============================================================================================================================================
+MemoryMeasurement.java
+
+Contains all the variables and methods to aid in measurement of memory consumption of the objects.
+
+============================================================================================================================================
+scriptPostMeasurement.py
+
+1.	Reads the constructorDetails.txt containing the memory consumption details of the objects in constructor.
+
+2.	Opens the original applet file and inserts the memory consumtion details as comments before each of the object whose consumption is more than zero.
+
+3.	The original applet in the sourceFile is replaced by this newly generated applet. A copy of this applet is stored also in the folder named modified 2.
+
+

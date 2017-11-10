@@ -1,0 +1,31 @@
+=============================================================================================================================================
+
+Step 1: EXECUTE THE ATTACK
+        - Communicate with ClientAppletB and execute shareableAbuseAttack method
+        - Send 0406 as amount to be credited as milesC 
+
+JAVACARD: JAVACOS A40 			: 90 00
+
+JAVACARD: Gemalto USB Shell Token	: 90 00
+
+OBSERVATIONS
+ - Access to MSIC type object was permitted to ClientAppletB by the Applet firewall
+ - Access to shareableAbuseAttack method of MSIC was permitted to ClientAppletB.
+ - Both the cards have Applet firewall shortcomings due to which this attack was successful
+
+=============================================================================================================================================
+
+Step 2: VERIFY THE ATTACK
+	- Communicate with ServerApplet and execute returnCreditedMiles method
+
+JAVACARD: JAVACOS A40 			: 00 00 04 06 90 00 
+
+JAVACARD: Gemalto USB Shell Token	: 00 00 04 06 90 00 
+
+OBSERVATIONS
+ - ServerApplet returned 0000 credited as milesB
+ - ServerApplet returned 0406 credited as milesC
+ - ClientAppletB is successful in crediting milesC using MSIC 
+ - Both the cards have Applet firewall shortcomings due to which this attack was successful
+
+=============================================================================================================================================

@@ -1,0 +1,27 @@
+============================================================================================================================================
+
+This folder contains the following:
+
+1.	Implementation Details text file. This file explains logic used in the python scripts and java code.
+
+2.	Observations text file. This file gives some observations after the memory consumption of various objects in constructors was measured. The observations are taken from several applets which were parsed and executed to get the memory consumption values.
+
+3.	Scripts and Code folder. Contains two python scripts and two Java code files used in this implementation.
+
+4.	Applets with Memory Measurements folder. This contains the various applets in which the memory consumption of the objects are prefixed as comments to the object statements.
+
+5.	Netbeans Project. This is the netbeans project which contains several applets on which the python script was executed to insert the memory consumption statements. Further, the applets were executed to get the actual consumption.
+
+============================================================================================================================================
+
+Implementation
+
+Step 1:  Change the sourceFile in scriptPreMeasurement.py to point to the applet (example applet present in Netbeans Project folder) whose memory consumption is required to be measured.
+
+Step 2:	 Run the python script scriptPreMeasurement.py. This will generate an applet containing the memory measurements statements before and after the objects in constructor. This applet replaces the original applet in the netbeans project folder.
+
+Step 3:  Open the netbeans foler with Netbeans software. Compile, convert the requisite applet into cap and load into Java Card. Invoke the memoryMeasurement method using ComnCard.java file present in packageTest folder. This will generate the constructorDetails.txt file containing the memory consumption details of objects.
+
+Step 4:  Change the sourceFile in scriptPostMeasurement.py to point to the applet (example applet present in Netbeans Project folder). Run the scriptPostMeasurement.py to insert the memory consumption details into the applet. The details are inserted as comments before the object whose memory consumption is more than zero. This applet is stored in its original folder in netbeans project folder.
+
+============================================================================================================================================

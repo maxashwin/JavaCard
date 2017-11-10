@@ -1,0 +1,79 @@
+=============================================================================================================================================
+
+CASE-2: TO FIND THE CONTENT OF MEMORY ADDRESS AT A GIVEN OFFSET
+
+=============================================================================================================================================
+JAVACARD: JAVACOS A40 
+=====================
+
+
+OBSERVATION 1
+ -  The memory address of APDU is 0050 of length 0105(Hex) which is 258(Decimal)
+ -  Initially returns the values of APDU buffer passed
+ -  Returns 0000 till offset is 00ae
+ -  Returns non-zeros value from offset 00af till 0104
+
+ADDRESS		LENGTH OF SHORT[]	OFFSET		VALUE AT OFFSET
+
+00 50 		01 05			00 00		00 50 		
+00 50 		01 05 			00 02 		04 00
+00 50 		01 05 			00 04 		50 00
+00 50 		01 05 			00 06 		00 00
+00 50 		01 05 			00 af 		fb 91 
+00 50 		01 05 			00 b0 		ac 17 
+00 50 		01 05 			00 b2 		a0 19
+00 50 		01 05 			01 00 		b3 b6 
+00 50 		01 05 			01 02 		ff c7 
+00 50 		01 05 			01 04 		0d 19
+
+OBSERVATION 2
+ -  The readable memory address of short[] are listed in the table below
+ -  These addresses are obtained by executing Case 4 of ComnCard class
+ -  Each short[] has different length
+ -  The content of each short[] can be read
+ -  Security wise, this card offers inferior security mechanisms
+
+ADDRESS		LENGTH OF SHORT[]	OFFSET		VALUE AT OFFSET
+
+00 52 		00 34 			00 00 		00 00 
+00 54 		00 48 			00 00 		00 00  
+00 56 		00 5c 			00 00 		00 00 
+00 58 		00 70 			00 00 		00 00 
+00 80 		00 b0 			00 00 		01 00 
+00 82 		00 b0 			00 00 		01 00 
+00 86 		00 03 			00 00 		00 02 
+00 8c 		00 b0 			00 00 		01 00 
+00 92 		00 b0 			00 00 		01 00 
+00 b6 		00 02 			00 00 		00 01 
+00 c2 		00 03 			00 00 		01 0f 
+00 c4 		01 fe 			00 00 		0b 00 
+00 c6 		00 b0 			00 00 		01 00 
+00 ca 		00 06 			00 00 		01 02  
+00 cc 		00 50 			00 00 		00 ca 
+00 ce 		00 50 			00 00 		00 50  
+
+============================================================================================================================================
+JAVACARD: Gemalto USB Shell Token
+=================================
+
+OBSERVATION 1
+ -  The memory address of APDU is 7412 of length 0105(Hex) which is 258(Decimal)
+ -  Initially returns the values of APDU buffer passed
+ -  Returns 0000 till last offset ie 0104
+ -  Does not return any non-zero values after offset 0006
+ -  Security wise, this card offers better security mechanisms 
+
+ADDRESS		LENGTH OF SHORT[]	OFFSET		VALUE AT OFFSET
+
+74 12 		01 05 			00 00 		00 74 
+74 12 		01 05 			00 02 		00 01 
+74 12 		01 05 			00 04 		00 00  
+74 12 		01 05 			00 06 		00 12  
+74 12 		01 05 			00 08 		00 00  
+74 12 		01 05 			00 b0 		00 00  
+74 12 		01 05 			00 b2 		00 00  
+74 12 		01 05 			01 00 		00 00  
+74 12 		01 05 			01 02 		00 00  
+74 12 		01 05 			01 04 		00 00 
+
+============================================================================================================================================

@@ -1,0 +1,31 @@
+=============================================================================================================================================
+
+CASE-4: To find the readable memory addresses starting from 0050, Number of iterations are 0040.
+
+=============================================================================================================================================
+JAVACARD: JAVACOS A40
+=======================
+
+OBSERVATIONS
+ -  The following are the readable memory addresses
+ -  Each non-zero represents a short[], each of different length
+ -  Security wise, the card has very inferior security mechanisms as it allows a illegitimate code to read content of memory as short[].
+
+b0 73 00 00 04 00 50 00 50 
+ResponseAPDU: 82 bytes, SW=9000
+00 50 00 52 00 54 00 56 00 58 00 80 00 82 00 86 00 8c 00 92 00 b6 00 c2 00 c4 00 c6 00 ca 00 cc 00 ce 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 90 00 
+
+=============================================================================================================================================
+JAVACARD: Gemalto USB Shell Token
+==================================
+
+OBSERVATIONS
+ -  The did not allow any other memory addresses which were readable apart from memory address of APDU buffer.
+ -  It gave an SCARD_E_NOT_TRANSACTED exception when the code was executed
+ -  Security wise, the card has very good security mechanisms
+
+b0 73 00 00 04 74 12 00 08 
+Exception : javax.smartcardio.CardException: sun.security.smartcardio.PCSCException: SCARD_E_NOT_TRANSACTED
+
+b0 73 00 00 04 74 12 00 40 
+Exception : javax.smartcardio.CardException: sun.security.smartcardio.PCSCException: SCARD_E_NOT_TRANSACTED

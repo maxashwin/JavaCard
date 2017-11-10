@@ -1,0 +1,303 @@
+// converted by version 1.3
+// on Thu Oct 05 12:25:23 IST 2017
+
+.package packageA {
+	.aid 0x1:0x2:0x3:0x4:0x1;
+	.version 1.1;
+
+	.imports {
+		0xA0:0x0:0x0:0x0:0x62:0x0:0x1 1.0;		//java/lang
+		0xA0:0x0:0x0:0x0:0x62:0x1:0x1 1.3;		//javacard/framework
+	}
+
+	.applet {
+		0x1:0x2:0x3:0x4:0x1:0x1 ServerApplet;
+	}
+
+	.constantPool {
+		// 0
+		instanceFieldRef byte[] ServerApplet/ServerAID;
+		// 1
+		instanceFieldRef byte[] ServerApplet/ClientAID;
+		// 2
+		instanceFieldRef short ServerApplet/APDUBufferAddress;
+		// 3
+		instanceFieldRef short ServerApplet/byteArrayAddress;
+		// 4
+		classRef ServerApplet;
+		// 5
+		virtualMethodRef 1.3.1()V;		// register()V
+		// 6
+		virtualMethodRef 1.6.2([BSB)Z;		// equals([BSB)Z
+		// 7
+		virtualMethodRef 1.10.1()[B;		// getBuffer()[B
+		// 8
+		virtualMethodRef 1.3.3()Z;		// selectingApplet()Z
+		// 9
+		virtualMethodRef ServerApplet/findBufferAddress(Ljavacard/framework/APDU;)V;
+			.descriptor	Ljavacard/framework/APDU;	1.10;
+
+		// 10
+		staticMethodRef 1.7.1(S)V;		// javacard/framework/ISOException.throwIt(S)V
+		// 11
+		virtualMethodRef ServerApplet/getByteArrayAddress([B)S;
+		// 12
+		staticMethodRef 1.3.0()V;		// javacard/framework/Applet.<init>()V
+		// 13
+		virtualMethodRef 1.10.7()S;		// setOutgoing()S
+		// 14
+		virtualMethodRef 1.10.9(S)V;		// setOutgoingLength(S)V
+		// 15
+		staticMethodRef 1.16.6([BSS)S;		// javacard/framework/Util.setShort([BSS)S
+		// 16
+		virtualMethodRef 1.10.4(SS)V;		// sendBytes(SS)V
+		// 17
+		staticMethodRef ServerApplet/<init>([BSB)V;
+	}
+
+	.interface public abstract MSI 0 {
+
+		.shareable;
+
+		.superInterfaces {
+			1.2;		// javacard/framework/Shareable
+		}
+
+		.method public abstract getByteArrayAddress([B)S 0 {
+		}
+
+		.method public abstract castShortToShortArray(S)[S 1 {
+		}
+
+	}
+
+	.class public ServerApplet 1 extends 1.3 {		// extends javacard/framework/Applet
+
+		.shareable;
+
+		.fields {
+			 byte[] ServerAID 0;		// [B
+			 byte[] ClientAID 1;		// [B
+			 short byteArrayAddress 2;		// S
+			 short APDUBufferAddress 3;		// S
+			private static final byte CLA_SIMPLEAPPLET = -80;		// B
+			private static final byte INS_FIND_BUFFER_ADDRESS = 112;		// B
+		}
+
+		.publicMethodTable 5 {
+			equals(Ljava/lang/Object;)Z;
+			register()V;
+			register([BSB)V;
+			selectingApplet()Z;
+			deselect()V;
+			getShareableInterfaceObject(Ljavacard/framework/AID;B)Ljavacard/framework/Shareable;;
+			select()Z;
+			process(Ljavacard/framework/APDU;)V;
+			getByteArrayAddress([B)S;
+			castShortToShortArray(S)[S;
+		}
+
+		.packageMethodTable 0 {
+			findBufferAddress(Ljavacard/framework/APDU;)V;
+		}
+
+		.implementedInterfaceInfoTable { 
+			.interface 1.2 { 		// javacard/framework/Shareable
+			}
+
+			.interface MSI { 
+				8;		// getByteArrayAddress([B)S
+				9;		// castShortToShortArray(S)[S
+			}
+
+		}
+
+		.method public static install([BSB)V 0 {
+			.stack 5;
+			.locals 0;
+
+				L0:	new 4;		// packageA/ServerApplet
+					dup;
+					aload_0;
+					sload_1;
+					sload_2;
+					invokespecial 17;		// packageA/ServerApplet.<init>([BSB)V
+					pop;
+					return;
+		}
+
+		.method protected <init>([BSB)V 1 {
+			.stack 5;
+			.locals 0;
+
+				L0:	aload_0;
+					invokespecial 12;		// javacard/framework/Applet.<init>()V
+					aload_0;
+					bspush 6;
+					newarray 11;
+					dup;
+					sconst_0;
+					sconst_1;
+					bastore;
+					dup;
+					sconst_1;
+					sconst_2;
+					bastore;
+					dup;
+					sconst_2;
+					sconst_3;
+					bastore;
+					dup;
+					sconst_3;
+					sconst_4;
+					bastore;
+					dup;
+					sconst_4;
+					sconst_1;
+					bastore;
+					dup;
+					sconst_5;
+					sconst_1;
+					bastore;
+					putfield_a 0;		// reference packageA/ServerApplet.ServerAID
+					aload_0;
+					bspush 6;
+					newarray 11;
+					dup;
+					sconst_0;
+					sconst_1;
+					bastore;
+					dup;
+					sconst_1;
+					sconst_2;
+					bastore;
+					dup;
+					sconst_2;
+					sconst_3;
+					bastore;
+					dup;
+					sconst_3;
+					sconst_4;
+					bastore;
+					dup;
+					sconst_4;
+					sconst_2;
+					bastore;
+					dup;
+					sconst_5;
+					sconst_1;
+					bastore;
+					putfield_a 1;		// reference packageA/ServerApplet.ClientAID
+					aload_0;
+					invokevirtual 5;		// register()V
+					return;
+		}
+
+		.method public getShareableInterfaceObject(Ljavacard/framework/AID;B)Ljavacard/framework/Shareable; 5 {
+			.stack 4;
+			.locals 0;
+
+			.descriptor	Ljavacard/framework/AID;	1.6;
+			.descriptor	Ljavacard/framework/Shareable;	1.2;
+
+				L0:	aload_1;
+					getfield_a_this 1;		// reference packageA/ServerApplet.ClientAID
+					sconst_0;
+					getfield_a_this 1;		// reference packageA/ServerApplet.ClientAID
+					arraylength;
+					s2b;
+					invokevirtual 6;		// equals([BSB)Z
+					ifeq L2;
+				L1:	aload_0;
+					areturn;
+				L2:	aconst_null;
+					areturn;
+		}
+
+		.method public process(Ljavacard/framework/APDU;)V 7 {
+			.stack 2;
+			.locals 1;
+
+			.descriptor	Ljavacard/framework/APDU;	1.10;
+
+				L0:	aload_1;
+					invokevirtual 7;		// getBuffer()[B
+					astore_2;
+				L1:	aload_0;
+					invokevirtual 8;		// selectingApplet()Z
+					ifeq L3;
+				L2:	return;
+				L3:	aload_2;
+					sconst_0;
+					baload;
+					bspush -80;
+					if_scmpne L7;
+				L4:	aload_2;
+					sconst_1;
+					baload;
+					slookupswitch L6 1 112 L5;
+				L5:	aload_0;
+					aload_1;
+					invokevirtual 9;		// findBufferAddress(Ljavacard/framework/APDU;)V
+					goto L8;
+				L6:	sspush 27904;
+					invokestatic 10;		// javacard/framework/ISOException.throwIt(S)V
+					goto L8;
+				L7:	sspush 28160;
+					invokestatic 10;		// javacard/framework/ISOException.throwIt(S)V
+				L8:	return;
+		}
+
+		.method  findBufferAddress(Ljavacard/framework/APDU;)V 128 {
+			.stack 3;
+			.locals 2;
+
+			.descriptor	Ljavacard/framework/APDU;	1.10;
+
+				L0:	aload_1;
+					invokevirtual 7;		// getBuffer()[B
+					astore_2;
+				L1:	aload_0;
+					aload_0;
+					aload_2;
+					invokevirtual 11;		// getByteArrayAddress([B)S
+					putfield_s 2;		// short packageA/ServerApplet.APDUBufferAddress
+					sconst_2;
+					sstore_3;
+				L2:	aload_1;
+					invokevirtual 13;		// setOutgoing()S
+					pop;
+					aload_1;
+					sload_3;
+					invokevirtual 14;		// setOutgoingLength(S)V
+					aload_2;
+					sconst_0;
+					getfield_s_this 2;		// short packageA/ServerApplet.APDUBufferAddress
+					invokestatic 15;		// javacard/framework/Util.setShort([BSS)S
+					pop;
+					aload_1;
+					sconst_0;
+					sload_3;
+					invokevirtual 16;		// sendBytes(SS)V
+					return;
+		}
+
+		.method public getByteArrayAddress([B)S 8 {
+			.stack 1;
+			.locals 0;
+
+				L0:	aload_1;//getfield_s_this 3;		// short packageA/ServerApplet.byteArrayAddress
+					sreturn;
+		}
+
+		.method public castShortToShortArray(S)[S 9 {
+			.stack 1;
+			.locals 0;
+
+				L0:	sload_1;//aconst_null;
+					areturn;
+		}
+
+	}
+
+}

@@ -1,0 +1,337 @@
+==========================================================================================================================================
+MEMORY CONSUMPTION OF OWNER PIN
+
+Syntax: new OwnerPIN(byte tryLimit, byte maxPINSize)
+
+Parameter case			Persistent Consumption		Transient Consumption
+==============			======================		=====================
+OwnerPIN(3,2)			44				1
+OwnerPIN(3,4)			44				1
+OwnerPIN(3,6)			48				1
+OwnerPIN(3,8)			48				1
+OwnerPIN(3,10)			52				1
+OwnerPIN(3,12)			52				1
+OwnerPIN(5,4)			44				1
+OwnerPIN(3,16)			56				1
+OwnerPIN(3,20)			60				1
+OwnerPIN(3,32)			72				1
+OwnerPIN[3]			16				0
+
+EEPROM: (40+LENGTH) + (mod 4)
+
+==========================================================================================================================================
+MEMORY CONSUMPTION OF OWNER PIN UPDATE
+
+Syntax: update(byte[] pin, short offset, byte length)
+
+Parameter case					Persistent Consumption		Transient Consumption
+==============					======================		=====================
+pin.update(defaultPIN, 0, 6)			0				0
+  where, defaultPIN is byte[8]
+
+pin.update(ramArray, 0, 4)
+  where, ramArray is transient byte[256]	0				0
+
+pin.update(new byte[]{0x12, 0x34}, 0, 2)	8				0
+
+==========================================================================================================================================
+MEMORY CONSUMPTION OF DATA ARRAY (PERSISTENT ARRAY)
+
+Syntax: new byte[LENGTH]
+
+Parameter case		Persistent Consumption		Transient Consumption
+==============		======================		=====================
+byte[1]			8				0
+byte[3]			8				0
+byte[9]			16				0
+byte[17]		24				0
+byte[24]		28				0
+byte[25]		32				0
+byte[40]		44				0
+byte[255]		260				0
+byte[256]		260				0
+
+==========================================================================================================================================
+MEMORY CONSUMPTION OF RAM ARRAY (TRANSIENT ARRAY)
+
+Syntax: JCSystem.makeTransientByteArray(LENGTH,  JCSystem.CLEAR_ON_DESELECT);
+
+Parameter case		Persistent Consumption		Transient Consumption
+  (LENGTH)
+==============		======================		=====================
+   1			8				1
+   128			8				128
+   255			8				256
+   256			8				256
+
+==========================================================================================================================================
+MEMORY CONSUMPTION OF GETINSTANCE
+
+Syntax: getInstance(byte algorithm, boolean externalAccess) 
+
+Algorithm								Persistent Consumption		Transient Consumption
+============								======================		===================== 
+Cipher.getInstance(Cipher.ALG_RSA_NOPAD, false)				24				259
+
+Cipher.getInstance(Cipher.ALG_RSA_PKCS1, false)				24				259
+
+Cipher.getInstance(Cipher.ALG_AES_BLOCK_128_CBC_NOPAD, false)		24				34
+
+Cipher.getInstance(Cipher.ALG_AES_BLOCK_128_ECB_NOPAD, false)		24				18
+
+=============================================================
+
+RandomData.getInstance(RandomData.ALG_SECURE_RANDOM)			0				0
+
+RandomData.getInstance(RandomData.ALG_PSEUDO_RANDOM)			12				0
+
+=============================================================
+
+MessageDigest.getInstance(MessageDigest.ALG_SHA, false)			20				95
+
+MessageDigest.getInstance(MessageDigest.ALG_SHA_256, false)		20				107
+
+MessageDigest.getInstance(MessageDigest.ALG_SHA_512, false)		20				211
+   
+==========================================================================================================================================
+MEMORY CONSUMPTION OF KEYPAIR
+
+Syntax: KeyPair(byte algorithm, short keyLength) 
+
+Algorithm								Persistent Consumption		Transient Consumption
+============								======================		=====================
+new KeyPair(KeyPair.ALG_RSA_CRT, (short) 2048)				1256				0
+
+new KeyPair(KeyPair.ALG_RSA, (short) 2048)				844				0
+
+new KeyPair(KeyPair.ALG_DSA, (short) 2048)				A40 Not Supported
+
+new KeyPair(KeyPair.ALG_EC_F2M, (short) 2048)				A40 Not Supported
+
+new KeyPair(KeyPair.ALG_EC_FP, (short) 2048)				A40 Not Supported
+
+==============================================
+
+new KeyPair(KeyPair.ALG_RSA, (short) 1024)				460				0
+
+new KeyPair(KeyPair.ALG_RSA_CRT, (short) 1024)				680				0
+
+==============================================
+
+new KeyPair(KeyPair.ALG_RSA, (short) 1280)				556				0
+
+new KeyPair(KeyPair.ALG_RSA_CRT, (short) 1280)				824				0
+
+==============================================
+
+m_keyPair.genKeyPair()							0				0
+m_cardPublic = (RSAPublicKey) m_keyPair.getPublic()			0				0
+m_cardPrivate = (RSAPrivateKey) m_keyPair.getPrivate()			0				0
+
+==============================================
+
+(RSAPrivateKey) KeyBuilder.buildKey
+(KeyBuilder.TYPE_RSA_PRIVATE, KeyBuilder.LENGTH_RSA_1024, false)	280				0
+
+(RSAPrivateCrtKey)KeyBuilder.buildKey
+(KeyBuilder.TYPE_RSA_CRT_PRIVATE, KeyBuilder.LENGTH_RSA_1024, false)	500				0
+
+(RSAPublicKey)KeyBuilder.buildKey
+(KeyBuilder.TYPE_RSA_PUBLIC, KeyBuilder.LENGTH_RSA_1024, false)		160				0
+
+==============================================
+
+(RSAPrivateKey) KeyBuilder.buildKey
+(KeyBuilder.TYPE_RSA_PRIVATE, KeyBuilder.LENGTH_RSA_1280, false)	344				0
+
+(RSAPrivateCrtKey)KeyBuilder.buildKey
+(KeyBuilder.TYPE_RSA_CRT_PRIVATE, KeyBuilder.LENGTH_RSA_1280, false)	612				0
+
+(RSAPublicKey)KeyBuilder.buildKey
+(KeyBuilder.TYPE_RSA_PUBLIC, KeyBuilder.LENGTH_RSA_1280, false)		192				0
+
+==============================================
+
+(RSAPrivateKey) KeyBuilder.buildKey
+(KeyBuilder.TYPE_RSA_PRIVATE, KeyBuilder.LENGTH_RSA_2048, false)	536				0
+
+(RSAPrivateCrtKey)KeyBuilder.buildKey
+(KeyBuilder.TYPE_RSA_CRT_PRIVATE, KeyBuilder.LENGTH_RSA_2048, false)	948				0
+
+(RSAPublicKey)KeyBuilder.buildKey
+(KeyBuilder.TYPE_RSA_PUBLIC, KeyBuilder.LENGTH_RSA_2048, false)		288				0
+
+=============================================
+
+KeyBuilder.buildKey
+(KeyBuilder.TYPE_DSA_PRIVATE, KeyBuilder.LENGTH_DSA_512, false)		DSA in A40 not supported
+
+=============================================
+
+(AESKey) KeyBuilder.buildKey
+(KeyBuilder.TYPE_AES, KeyBuilder.LENGTH_AES_128, false)			44				0
+
+(AESKey) KeyBuilder.buildKey
+(KeyBuilder.TYPE_AES, KeyBuilder.LENGTH_AES_192, false)			52				0
+
+(AESKey) KeyBuilder.buildKey
+(KeyBuilder.TYPE_AES, KeyBuilder.LENGTH_AES_256, false)			60				0
+
+(AESKey) KeyBuilder.buildKey
+(KeyBuilder.TYPE_AES_TRANSIENT_DESELECT, KeyBuilder.LENGTH_AES_256)	32				33
+
+(AESKey) KeyBuilder.buildKey
+(KeyBuilder.TYPE_AES_TRANSIENT_DESELECT, KeyBuilder.LENGTH_AES_128)	32				17
+
+
+
+============================================================================================================================================
+/* Allocation in constructor */
+// Allocation in constructor consumes 8 extra bytes in eeprom 
+
+public class TestClass100 {
+    
+    private static byte[] ramArray;
+
+    public TestClass100(){
+        ramArray = JCSystem.makeTransientByteArray((short)500,  JCSystem.CLEAR_ON_RESET);
+    }
+    
+}
+
+public class TestClass1 {
+    
+    private byte[] ramArray;
+
+    public TestClass1(){
+        ramArray = JCSystem.makeTransientByteArray((short)500,  JCSystem.CLEAR_ON_RESET);
+    }
+    
+}
+
+public class TestClass8 {
+    
+    private byte[] ramArray;
+
+    public TestClass8(){
+        ramArray = JCSystem.makeTransientByteArray((short)500,  JCSystem.CLEAR_ON_DESELECT);
+    }
+    
+}
+
+/* Persistent : 16 bytes,  Transient(Deselect) : 500 bytes,  Transient(Reset) : 500 bytes */
+        TC1 = new TestClass1();
+
+
+ /* Persistent : 16 bytes,  Transient(Deselect) : 500 bytes,  Transient(Reset) : 500 bytes */
+        TC100 = new TestClass100();
+        
+
+ /* Persistent : 16 bytes,  Transient(Deselect) : 500 bytes,  Transient(Reset) : 500 bytes */
+        TC8 = new TestClass8();
+
+============================================================================================================================================
+/* Allocation in constructor vs static method */
+// Allocation in static method does not consume any extra bytes
+
+public class TestClass100 {
+    
+    private static byte[] ramArray;
+    private static byte[] ramArray1;
+
+    public TestClass100(){
+        ramArray = JCSystem.makeTransientByteArray((short)500,  JCSystem.CLEAR_ON_RESET);
+    }
+    
+    public static void methodTest1(){
+        ramArray1 = JCSystem.makeTransientByteArray((short)500,  JCSystem.CLEAR_ON_RESET);
+    }
+    
+    public static void methodTest2(){
+        byte[] ramArray2 = JCSystem.makeTransientByteArray((short)500,  JCSystem.CLEAR_ON_RESET);
+    }
+}
+
+public ServerApplet(){
+        
+ /* Persistent : 16 bytes,  Transient(Deselect) : 500 bytes,  Transient(Reset) : 500 bytes */
+        TC100 = new TestClass100();
+        
+
+ /* Persistent : 8 bytes,  Transient(Deselect) : 500 bytes,  Transient(Reset) : 500 bytes */
+        TestClass100.methodTest1();
+
+
+ /* Persistent : 8 bytes,  Transient(Deselect) : 500 bytes,  Transient(Reset) : 500 bytes */
+        TestClass100.methodTest2();
+
+        register();
+}
+
+=========================================================================================================================================== 
+
+public class TestClass100 {
+    
+    private static byte[] eepromArray;
+    private static byte[] eepromArray1;
+
+    public TestClass100(){
+        eepromArray = new byte[(short)500];
+    }
+    
+    public static void methodTest1(){
+        eepromArray1 = new byte[(short)500];
+    }
+    
+    public static void methodTest2(){
+        byte[] eepromArray2 = new byte[(short)500];
+    }
+}
+
+public ServerApplet(){
+
+ /* Persistent : 512 bytes,  Transient(Deselect) : 0 bytes,  Transient(Reset) : 0 bytes */
+        TC100 = new TestClass100();
+ 
+
+ /* Persistent : 504 bytes,  Transient(Deselect) : 0 bytes,  Transient(Reset) : 0 bytes */
+        TestClass100.methodTest1();
+
+
+ /* Persistent : 504 bytes,  Transient(Deselect) : 0 bytes,  Transient(Reset) : 0 bytes */
+        TestClass100.methodTest2();
+
+        register();
+} 
+
+==========================================================================================================================================
+public void process(APDU apdu) throws ISOException {
+        byte[] apduBuffer = apdu.getBuffer();
+
+        if (selectingApplet())
+            return;
+        
+        if (apduBuffer[ISO7816.OFFSET_CLA] == CLA_SIMPLEAPPLET1) {
+            switch (apduBuffer[ISO7816.OFFSET_INS] )
+            {
+                case INS_USERINPUT1:
+  		    /* Persistent : 824 bytes,  Transient(Deselect) : 0 bytes,  Transient(Reset) : 0 bytes */
+                    foo(apdu); 
+                    break;
+		case INS_MEMORYMEASURE: memoryMeasure(apdu); break;
+                default :
+                    ISOException.throwIt( ISO7816.SW_INS_NOT_SUPPORTED ) ;
+                    break ;
+            }
+        }
+        else ISOException.throwIt( ISO7816.SW_CLA_NOT_SUPPORTED);
+}
+public void foo(APDU apdu){
+                      
+        byte[]    apdubuf = apdu.getBuffer();
+        
+        privateKey = KeyBuilder.buildKey(KeyBuilder.TYPE_RSA_PRIVATE, KeyBuilder.LENGTH_RSA_2048, false);
+        publicKey = KeyBuilder.buildKey(KeyBuilder.TYPE_RSA_PUBLIC, KeyBuilder.LENGTH_RSA_2048, false);
+
+        apdu.setOutgoing();
+    }

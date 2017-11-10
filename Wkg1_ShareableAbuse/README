@@ -1,0 +1,18 @@
+=============================================================================================================================================
+
+INSTRUCTIONS FOR INSTALLATION AND EXECUTION
+
+==========================================================================
+
+Step 1:  Install server.cap and clientB.cap given in CAP_File folder. These files are compiled files
+
+Step 2:  Execute the attack. Communicate using ComnCard class with ClientAppletB and execute shareableAbuseAttack method. ComnCard class is located in Project/Shareable/src/packageTest/ folder. 
+
+Step 3:  Verify the attack. Communicate with ServerApplet and execute returnCreditedMiles method. ComnCard class is located in Project/Shareable/src/packageTest/ folder. 
+
+The detailed instructions on what parameters to be set are given in the ComnCard class
+
+
+=============================================================================================================================================
+
+

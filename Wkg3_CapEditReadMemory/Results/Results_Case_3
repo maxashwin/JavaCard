@@ -1,0 +1,75 @@
+=============================================================================================================================================
+
+CASE-3: TO FIND THE CONTENT OF MEMORY ADDRESS RETURNED AS SHORT[] OF LENGTH PASSED
+
+=============================================================================================================================================
+JAVACARD: JAVACOS A40
+======================
+
+OBSERVATIONS
+ -  Lists the content of several readable memory addresses
+ -  All the contents of short[] are readable till the length of short[]
+ -  Security wise, the card has inferior security mechanisms as memory is accessible
+
+MEMORY ADDRESS	: 0052		LENGTH		: 001a
+OUTPUT		: 
+00 00 00 00 28 00 00 3e 00 00 00 00 28 00 00 48 00 00 00 00 28 00 00 52 00 00 90 00
+
+MEMORY ADDRESS	: 0054		LENGTH		: 0048
+OUTPUT		: 
+00 00 00 00 28 00 00 52 00 00 00 00 28 00 00 5c 00 00 00 00 28 00 00 66 00 00 00 00 28 00 00 70 00 00 00 00 28 00 00 13 01 00 00 5a b2 00 00 01 01 05 00 50 28 00 00 c6 01 00 00 5c b2 00 00 01 01 07 00 5a 28 00 00 d0 90 00 
+
+MEMORY ADDRESS	: 0056		LENGTH		: 005c
+OUTPUT		: 
+00 00 00 00 28 00 00 66 00 00 00 00 28 00 00 70 00 00 00 00 28 00 00 13 01 00 00 5a b2 00 00 01 01 05 00 50 28 00 00 c6 01 00 00 5c b2 00 00 01 01 07 00 5a 28 00 00 d0 01 00 00 5e b2 00 00 01 01 09 00 5c 28 00 00 63 01 00 00 60 b2 00 00 01 01 0b 00 5e 28 00 00 4f 01 00 00 62 90 00 
+
+MEMORY ADDRESS	: 0080		LENGTH		: 0082
+OUTPUT		: 
+01 00 00 84 80 00 00 07 a0 00 00 05 27 21 01 00 20 00 01 00 08 00 00 00 00 06 00 00 00 80 00 86 00 87 00 00 8c 00 00 03 00 02 01 00 e0 00 00 01 00 01 08 00 00 8a 00 05 80 00 00 08 a0 00 00 05 27 21 01 01 2c 00 00 b0 01 00 00 88 20 00 00 01 08 00 04 61 00 89 02 00 80 82 00 03 00 02 02 00 2c 00 00 b0 01 00 00 8d 80 00 00 06 73 69 6d 70 6c 65 00 00 20 00 01 00 08 00 00 00 00 00 00 00 00 8c 90 00 
+
+MEMORY ADDRESS	: 0082		LENGTH		: 0082
+OUTPUT		: 
+01 00 00 83 80 00 00 08 a0 00 00 00 03 00 00 00 2c 00 01 fe 0b 00 00 00 00 00 00 00 2c 00 00 b0 01 00 00 84 80 00 00 07 a0 00 00 05 27 21 01 00 20 00 01 00 08 00 00 00 00 06 00 00 00 80 00 86 00 87 00 00 8c 00 00 03 00 02 01 00 e0 00 00 01 00 01 08 00 00 8a 00 05 80 00 00 08 a0 00 00 05 27 21 01 01 2c 00 00 b0 01 00 00 88 20 00 00 01 08 00 04 61 00 89 02 00 80 82 00 03 00 02 02 00 2c 00 90 00 
+
+MEMORY ADDRESS	: 0086		LENGTH		: 0003
+OUTPUT		: 
+00 02 01 90 00 
+
+MEMORY ADDRESS	: 008c		LENGTH		: 0082
+OUTPUT		: 
+01 00 00 8d 80 00 00 06 73 69 6d 70 6c 65 00 00 20 00 01 00 08 00 00 00 00 00 00 00 00 8c 00 8f 00 90 00 00 8c 00 00 04 01 02 03 00 e0 00 00 01 00 01 08 00 00 93 6d 70 80 00 00 0c 73 69 6d 70 6c 65 61 70 70 6c 65 74 2c 00 00 b0 01 00 00 91 20 00 00 01 08 00 01 78 00 92 00 94 20 00 00 0b 08 00 00 94 00 92 07 00 00 00 00 00 00 00 fe 1d 20 01 00 00 0e 00 00 96 00 99 00 9b 00 c4 00 b0 00 9e 90 00 
+
+MEMORY ADDRESS	: 0092		LENGTH		: 0082
+OUTPUT		: 
+01 00 00 91 20 00 00 01 08 00 01 78 00 92 00 94 20 00 00 0b 08 00 00 94 00 92 07 00 00 00 00 00 00 00 fe 1d 20 01 00 00 0e 00 00 96 00 99 00 9b 00 c4 00 b0 00 9e 00 ae 00 a2 00 a4 00 ab 00 9d 00 95 00 00 80 01 00 ff 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 90 00 
+
+MEMORY ADDRESS	: 00b6		LENGTH		: 0002
+OUTPUT		: 
+00 01 90 00 
+
+MEMORY ADDRESS	: 00c2		LENGTH		: 0003
+OUTPUT		: 
+01 0f 00 90 00
+
+MEMORY ADDRESS	: 00c4		LENGTH		: 0082
+OUTPUT		: 
+0b 00 00 00 00 00 00 00 2c 00 00 b0 01 00 00 84 80 00 00 07 a0 00 00 05 27 21 01 00 20 00 01 00 08 00 00 00 00 06 00 00 00 80 00 86 00 87 00 00 8c 00 00 03 00 02 01 00 e0 00 00 01 00 01 08 00 00 8a 00 05 80 00 00 08 a0 00 00 05 27 21 01 01 2c 00 00 b0 01 00 00 88 20 00 00 01 08 00 04 61 00 89 02 00 80 82 00 03 00 02 02 00 2c 00 00 b0 01 00 00 8d 80 00 00 06 73 69 6d 70 6c 65 00 00 20 00 90 00 
+
+MEMORY ADDRESS	: 00c6		LENGTH		: 0082
+OUTPUT		: 
+01 00 00 c5 20 00 00 01 08 00 00 9b 00 c6 00 c8 20 00 00 0b 08 00 00 c8 00 c6 07 00 00 00 00 00 00 00 03 d8 20 03 00 00 10 00 00 c9 00 ca 00 c6 00 00 06 e4 80 03 00 06 01 02 03 04 01 01 7f ff 80 03 00 06 01 02 03 04 02 01 02 08 a0 03 00 50 00 50 00 52 00 54 00 56 00 58 00 80 00 82 00 86 00 8c 00 92 00 b6 00 c2 00 c4 00 c6 00 ca 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 90 00 
+
+============================================================================================================================================
+JAVACARD: Gemalto USB Shell Token
+=================================
+
+OBSERVATIONS
+ -  None of the memory addresses were readable other than that of APDU buffer
+ -  The contents of short[] are returned as "ff" or "b0"
+ -  Security wise, the card has good security mechanisms as memory is not accessible to even illegal instructions
+
+MEMORY ADDRESS	: 7412		LENGTH		: 0082
+OUTPUT		:
+ff b0 ff b0 ff ff ff b0 ff ff ff ff ff ff ff b0 ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff b0 ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff b0 ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff b0 ff ff 90 00 
+
+============================================================================================================================================
